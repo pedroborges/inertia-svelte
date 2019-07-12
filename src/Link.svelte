@@ -4,8 +4,9 @@
 
   const dispatch = createEventDispatcher()
 
-  export let href,
+  export let
     data = {},
+    href,
     method = 'get',
     replace = false,
     preserveScroll = false,

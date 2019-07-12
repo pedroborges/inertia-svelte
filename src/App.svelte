@@ -1,7 +1,8 @@
 <script>
-  import { Inertia, page } from './index'
+  import { Inertia, page } from './'
 
-  export let initialPage,
+  export let
+    initialPage,
     resolveComponent,
     transformProps = i => i
 
