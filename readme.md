@@ -16,21 +16,37 @@ The first step when using Inertia.js is to configure your server-side framework.
 
 ## Setting up Webpack
 
+You'll need to setup the svelte-loader for webpack. You can do it manually following [these](https://github.com/sveltejs/svelte-loader) instructions, or just using [laravel-mix-svelte](https://github.com/wewowweb/laravel-mix-svelte#readme).
+
 Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
 
 ~~~js
 const mix = require('laravel-mix')
 const path = require('path')
 
-mix
-  .react('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .webpackConfig({
-    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
+    output: {chunkFilename: 'js/[name].js?id=[chunkhash]'},
     resolve: {
+      mainFields: ['svelte', 'browser', 'module', 'main'],
       alias: {
         '@': path.resolve('resources/js'),
       },
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(html|svelte)$/,
+          use: {
+            loader: 'svelte-loader',
+            options: {
+              emitCss: true,
+              hotReload: true,
+            },
+          },
+        },
+      ],
     },
   })
 ~~~
