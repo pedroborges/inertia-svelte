@@ -11,6 +11,10 @@
     replace = false,
     preserveScroll = false,
     preserveState = false
+  
+  let className
+
+  export { className as class }
 
   function visit(event) {
     dispatch('click', event)
@@ -29,6 +33,6 @@
   }
 </script>
 
-<a href={href} on:click={visit}>
+<a href={href} class={className} on:click={visit}>
   <slot />
 </a>
