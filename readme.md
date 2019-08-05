@@ -7,7 +7,7 @@
 Install using NPM:
 
 ~~~sh
-npm install pedroborges/inertia-svelte --save
+npm install inertiajs/inertia-svelte --save
 ~~~
 
 ## Configure server-side framework
