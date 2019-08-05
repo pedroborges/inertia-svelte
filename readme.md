@@ -144,7 +144,7 @@ export default new Inertia({
 
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.svelte`.
 
-~~~jsx harmony
+~~~svelte
 <script>
   import { InertiaLink } from 'inertia-svelte'
 
@@ -152,7 +152,7 @@ While not required, for most projects it makes sense to create a default site la
 </script>
 
 <svelte:head>
-	<title>{title}</title>
+    <title>{title}</title>
 </svelte:head>
 
 <main>
@@ -172,7 +172,7 @@ While not required, for most projects it makes sense to create a default site la
 
 With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.svelte`. Note how it extends the `Layout.svelte` component we created above.
 
-~~~jsx harmony
+~~~svelte
 <script>
   import Layout from '@/Shared/Layout.svelte';
 </script>
@@ -187,7 +187,7 @@ With Inertia.js, each page in your application is a JavaScript component. Here's
 
 To create an Inertia link, use the `<InertiaLink>` component.
 
-~~~jsx harmony
+~~~svelte
 <script>
   import { InertiaLink } from 'inertia-svelte'
 </script>
@@ -197,25 +197,25 @@ To create an Inertia link, use the `<InertiaLink>` component.
 
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserveScroll` attributes.
 
-~~~jsx harmony
+~~~svelte
 <InertiaLink replace preserveScroll href="/">Home</InertiaLink>
 ~~~
 
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-~~~jsx harmony
+~~~svelte
 <InertiaLink href="/logout" method="post">Logout</InertiaLink>
 ~~~
 
 You can add data using the `data` attribute:
 
-~~~jsx harmony
+~~~svelte
 <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
 ~~~
 
 You can also preserve a page component's local state using the `preserveState` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
-~~~jsx harmony
+~~~svelte
 <input on:change={handleChange} value={query} />
 <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
 ~~~
@@ -255,7 +255,7 @@ Sometimes it's necessary to access the page data (props) from a non-page compone
 
 The easiest way to access page props is with our `pageProps` store.
 
-~~~jsx harmony
+~~~svelte
 <script>
   import { InertiaLink, pageProps } from 'inertia-svelte'
   
@@ -281,7 +281,7 @@ The easiest way to access page props is with our `pageProps` store.
 
 If you need to access the entire Inertia `page` object, you can directly access it via the `page` store. Note that `pageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
 
-~~~jsx harmony
+~~~svelte
 <script>
   import { InertiaLink, page } from 'inertia-svelte'
 
@@ -311,7 +311,7 @@ When navigating browser history, Inertia reloads pages using prop data cached in
 
 To mitigate this issue, you can use the `rememberedState` store to tell Inertia.js which local component state to cache.
 
-~~~jsx harmony
+~~~svelte
 <script>
   import { Inertia, rememberedState } from 'inertia-svelte'
 
@@ -334,7 +334,7 @@ To mitigate this issue, you can use the `rememberedState` store to tell Inertia.
 
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
-~~~jsx harmony
+~~~svelte
 <script>
   import { Inertia, pageProps, rememberedState } from 'inertia-svelte'
 
