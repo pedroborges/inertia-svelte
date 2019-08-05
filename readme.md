@@ -79,7 +79,7 @@ mix.babelConfig({
 
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Svelte with the base Inertia page component.
 
-~~~svelte
+~~~jsx harmony
 import Inertia from 'inertia-svelte'
 
 const app = document.getElementById('app')
@@ -101,7 +101,7 @@ It's possible to also use Inertia without code splitting. This will generate one
 
 One way to do this is manually loading all your page components:
 
-~~~svelte
+~~~jsx harmony
 import Inertia from 'inertia-svelte'
 
 const app = document.getElementById('app')
@@ -124,7 +124,7 @@ export default new Inertia({
 
 Another option is to use `required.context` to automatically register all your page components.
 
-~~~svelte
+~~~jsx harmony
 import Inertia from './Inertia/App.svelte'
 
 const app = document.getElementById('app')
