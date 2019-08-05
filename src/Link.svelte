@@ -12,9 +12,7 @@
     preserveScroll = false,
     preserveState = false
   
-  let className
-
-  export { className as class }
+  $: props = (({ data, href, method, replace, preserveScroll, preserveState, ...rest }) => rest)($$props)
 
   function visit(event) {
     dispatch('click', event)
@@ -33,6 +31,6 @@
   }
 </script>
 
-<a href={href} class={className} on:click={visit}>
+<a {...props} href={href} on:click={visit}>
   <slot />
 </a>
