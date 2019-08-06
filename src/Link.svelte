@@ -12,7 +12,7 @@
     preserveScroll = false,
     preserveState = false
   
-  $: props = (({ data, href, method, replace, preserveScroll, preserveState, ...rest }) => rest)($$props)
+  $: props = (({ data, href, method, preserveScroll, preserveState, replace, ...rest }) => rest)($$props)
 
   function visit(event) {
     dispatch('click', event)

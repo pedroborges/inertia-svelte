@@ -6,9 +6,7 @@ function rememberedState(initialState, key) {
     const store = writable(Inertia.restore(key) || initialState)
     const unsubscribe = store.subscribe(state => Inertia.remember(state, key))
 
-    onDestroy(() => {
-        unsubscribe()
-    })
+    onDestroy(unsubscribe)
 
     return store
 }
