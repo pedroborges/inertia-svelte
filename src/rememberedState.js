@@ -3,7 +3,8 @@ import { onDestroy } from 'svelte'
 import { writable } from 'svelte/store'
 
 function rememberedState(initialState, key) {
-    const store = writable(Inertia.restore(key) || initialState)
+    const restored = Inertia.restore(key)
+    const store = writable(restored !== undefined ? restored : initialState)
     const unsubscribe = store.subscribe(state => Inertia.remember(state, key))
 
     onDestroy(unsubscribe)
