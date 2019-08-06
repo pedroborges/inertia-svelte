@@ -315,7 +315,7 @@ To mitigate this issue, you can use the `rememberedState` store to tell Inertia.
 <script>
   import { Inertia, rememberedState } from 'inertia-svelte'
 
-  let form = useRememberedState({
+  let form = rememberedState({
     first_name: null,
     last_name: null,
   })
@@ -340,7 +340,7 @@ If your page contains multiple components using the remember functionality, you'
 
   $: ({ user } = $pageProps)
 
-  let form = useRememberedState({
+  let form = rememberedState({
     first_name: null,
     last_name: null,
   }, `Users/Edit:${user.id}`)
