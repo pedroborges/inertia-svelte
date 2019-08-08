@@ -217,7 +217,7 @@ You can add data using the `data` attribute:
 You can also preserve a page component's local state using the `preserveState` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
 ~~~svelte
-<input on:change={handleChange} value={query} />
+<input value={query} on:change={handleChange} />
 <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
 ~~~
 
