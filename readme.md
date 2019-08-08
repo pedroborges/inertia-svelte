@@ -24,7 +24,8 @@ Here is an example Webpack configuration that uses [Laravel Mix](https://github.
 const mix = require('laravel-mix')
 const path = require('path')
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+  .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .webpackConfig({
     output: {chunkFilename: 'js/[name].js?id=[chunkhash]'},
@@ -37,7 +38,7 @@ mix.js('resources/js/app.js', 'public/js')
     module: {
       rules: [
         {
-          test: /\.(html|svelte)$/,
+          test: /\.(svelte)$/,
           use: {
             loader: 'svelte-loader',
             options: {
@@ -84,7 +85,7 @@ import Inertia from 'inertia-svelte'
 
 const app = document.getElementById('app')
 
-export default new Inertia({
+new Inertia({
   target: app,
   props: {
     initialPage: JSON.parse(app.dataset.page),
@@ -113,7 +114,7 @@ const pages = {
   // etc...
 }
 
-export default new Inertia({
+new Inertia({
   target: app,
   props: {
     initialPage: JSON.parse(app.dataset.page),
@@ -125,7 +126,7 @@ export default new Inertia({
 Another option is to use `required.context` to automatically register all your page components.
 
 ~~~js
-import Inertia from './Inertia/App.svelte'
+import Inertia from 'inertia-svelte'
 
 const app = document.getElementById('app')
 
@@ -332,6 +333,8 @@ To mitigate this issue, you can use the `remember` store to tell Inertia.js whic
 </form>
 ~~~
 
+> `remember` returns a store. Prefix the variable you assign it to with `$` to take advantage of [auto-subscription](https://svelte.dev/tutorial/auto-subscriptions).
+
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
 ~~~svelte
@@ -344,15 +347,7 @@ If your page contains multiple components using the remember functionality, you'
     first_name: null,
     last_name: null,
   }, `Users/Edit:${user.id}`)
+
+  // ...
 </script>
-
-<form on:submit|preventDefault={() => Inertia.post('/contact', $form)}>
-  <label for="first_name">First Name:</label>
-  <input id="first_name" bind:value={$form.first_name}></div>
-
-  <label for="last_name">Last name:</label>
-  <input id="last_name" bind:value={$form.last_name}></div>
-
-  <button type="submit">Save</button>
-</form>
 ~~~
