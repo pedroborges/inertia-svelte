@@ -232,7 +232,7 @@ Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: fal
 // Make a "replace" visit
 Inertia.replace(url, { method: 'get', data: {}, preserveState: true, preserveScroll: false })
 
-// Make a "replace" visit to the current url
+// Make a "reload" visit to the current url
 Inertia.reload({ method: 'get', data: {}, preserveState: false, preserveScroll: false })
 
 // Make a POST visit
