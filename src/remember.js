@@ -2,7 +2,7 @@ import Inertia from 'inertia'
 import { onDestroy } from 'svelte'
 import { writable } from 'svelte/store'
 
-function rememberedState(initialState, key) {
+function remember(initialState, key) {
     const restored = Inertia.restore(key)
     const store = writable(restored !== undefined ? restored : initialState)
     const unsubscribe = store.subscribe(state => Inertia.remember(state, key))
@@ -12,4 +12,4 @@ function rememberedState(initialState, key) {
     return store
 }
 
-export default rememberedState
+export default remember

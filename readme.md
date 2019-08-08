@@ -309,13 +309,13 @@ If you need to access the entire Inertia `page` object, you can directly access 
 
 When navigating browser history, Inertia reloads pages using prop data cached in history state. Inertia does not, however, cache local component state, since this is beyond its reach. This can lead to outdated pages in your browser history. For example, if a user partially completes a form, then navigates away, and then returns back, the form will be reset and their work will have been lost.
 
-To mitigate this issue, you can use the `rememberedState` store to tell Inertia.js which local component state to cache.
+To mitigate this issue, you can use the `remember` store to tell Inertia.js which local component state to cache.
 
 ~~~svelte
 <script>
-  import { Inertia, rememberedState } from 'inertia-svelte'
+  import { Inertia, remember } from 'inertia-svelte'
 
-  let form = rememberedState({
+  let form = remember({
     first_name: null,
     last_name: null,
   })
@@ -336,11 +336,11 @@ If your page contains multiple components using the remember functionality, you'
 
 ~~~svelte
 <script>
-  import { Inertia, pageProps, rememberedState } from 'inertia-svelte'
+  import { Inertia, pageProps, remember } from 'inertia-svelte'
 
   $: ({ user } = $pageProps)
 
-  let form = rememberedState({
+  let form = remember({
     first_name: null,
     last_name: null,
   }, `Users/Edit:${user.id}`)
