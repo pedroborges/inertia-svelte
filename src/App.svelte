@@ -1,6 +1,6 @@
 <script>
   import Inertia from 'inertia'
-  import page from './page'
+  import store from './store'
 
   export let
     initialPage,
@@ -11,9 +11,9 @@
     initialPage,
     resolveComponent,
     updatePage: (component, props) => {
-      page.set({ component, props: transformProps(props) })
+      store.set({ component, props: transformProps(props) })
     },
   })
 </script>
 
-<svelte:component this={$page.component} {...$page.props} />
+<svelte:component this={$store.component} {...$store.props} />

@@ -252,46 +252,18 @@ Just like with an `<InertiaLink>`, you can control the history control behaviour
 
 ## Accessing page data in other components
 
-Sometimes it's necessary to access the page data (props) from a non-page component. One really common use-case for this is the site layout. For example, maybe you want to show the currently authenticated user in your site header. This is possible using React's context feature. The base Inertia component automatically provides the current page via context, which can then be accessed by a consumer later on.
+Sometimes it's necessary to access the page data (props) from a non-page component. One really common use-case for this is the site layout. For example, maybe you want to show the currently authenticated user in your site header. This is possible using Svelte's store feature.
 
-The easiest way to access page props is with our `pageProps` store.
-
-~~~svelte
-<script>
-  import { InertiaLink, pageProps } from 'inertia-svelte'
-  
-  $: ({ auth } = $pageProps)
-</script>
-
-<main>
-  <header>
-    You are logged in as: {auth.user.name}
-
-    <nav>
-      <InertiaLink href="/">Home</InertiaLink>
-      <InertiaLink href="/about">About</InertiaLink>
-      <InertiaLink href="/contact">Contact</InertiaLink>
-    </nav>
-  </header>
-
-  <article>
-    <slot />
-  </article>
-</main>
-~~~
-
-If you need to access the entire Inertia `page` object, you can directly access it via the `page` store. Note that `pageProps` should suffice for most use cases, so we don't recommend doing this unless you have a good reason!
+The easiest way to access page props is with our `page` store.
 
 ~~~svelte
 <script>
   import { InertiaLink, page } from 'inertia-svelte'
-
-  $: props = $page.props
 </script>
 
 <main>
   <header>
-    You are logged in as: {props.auth.user.name}
+    You are logged in as: {$page.auth.user.name}
 
     <nav>
       <InertiaLink href="/">Home</InertiaLink>
@@ -339,9 +311,9 @@ If your page contains multiple components using the remember functionality, you'
 
 ~~~svelte
 <script>
-  import { Inertia, pageProps, remember } from 'inertia-svelte'
+  import { Inertia, page, remember } from 'inertia-svelte'
 
-  $: ({ user } = $pageProps)
+  $: ({ user } = $page)
 
   let form = remember({
     first_name: null,
