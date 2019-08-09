@@ -199,7 +199,7 @@ To create an Inertia link, use the `<InertiaLink>` component.
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserveScroll` attributes.
 
 ~~~svelte
-<InertiaLink replace preserveScroll href="/">Home</InertiaLink>
+<InertiaLink href="/" preserveScroll replace>Home</InertiaLink>
 ~~~
 
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
