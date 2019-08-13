@@ -1,5 +1,5 @@
 <script>
-  import Inertia from 'inertia'
+  import { Inertia } from 'inertia'
   import store from './store'
 
   export let

@@ -1,8 +1,4 @@
-import Inertia from 'inertia'
-import App from './App.svelte'
-import InertiaLink from './Link.svelte'
-import page from './page'
-import remember from './remember'
-
-export default App
-export { Inertia, InertiaLink, page, remember }
+export { default as InertiaApp } from './App.svelte'
+export { default as InertiaLink } from './Link.svelte'
+export { default as page } from './page'
+export { default as remember } from './remember'

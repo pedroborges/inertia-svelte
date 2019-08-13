@@ -1,5 +1,5 @@
 <script>
-  import Inertia, { shouldIntercept } from 'inertia'
+  import { Inertia, shouldIntercept } from 'inertia'
   import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
