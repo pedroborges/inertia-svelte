@@ -1,4 +1,4 @@
-import { Inertia } from 'inertia'
+import { Inertia } from '@inertiajs/inertia'
 import { onDestroy } from 'svelte'
 import { writable } from 'svelte/store'
 
