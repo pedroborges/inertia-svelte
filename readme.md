@@ -5,7 +5,7 @@
 Install using NPM:
 
 ~~~sh
-npm install inertiajs/inertia-svelte --save
+npm install @inertiajs/inertia-svelte --save
 ~~~
 
 ## Configure server-side framework
@@ -79,11 +79,11 @@ mix.babelConfig({
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Svelte with the base Inertia page component.
 
 ~~~js
-import Inertia from 'inertia-svelte'
+import { InertiaApp } from '@inertiajs/inertia-svelte'
 
 const app = document.getElementById('app')
 
-new Inertia({
+new InertiaApp({
   target: app,
   props: {
     initialPage: JSON.parse(app.dataset.page),
@@ -101,7 +101,7 @@ It's possible to also use Inertia without code splitting. This will generate one
 One way to do this is manually loading all your page components:
 
 ~~~js
-import Inertia from 'inertia-svelte'
+import { InertiaApp } from '@inertiajs/inertia-svelte'
 
 const app = document.getElementById('app')
 
@@ -112,7 +112,7 @@ const pages = {
   // etc...
 }
 
-new Inertia({
+new InertiaApp({
   target: app,
   props: {
     initialPage: JSON.parse(app.dataset.page),
@@ -124,13 +124,13 @@ new Inertia({
 Another option is to use `required.context` to automatically register all your page components.
 
 ~~~js
-import Inertia from 'inertia-svelte'
+import { InertiaApp } from '@inertiajs/inertia-svelte'
 
 const app = document.getElementById('app')
 
 const files = require.context('./', true, /\.svelte$/i)
 
-export default new Inertia({
+new InertiaApp({
   target: app,
   props: {
     initialPage: JSON.parse(app.dataset.page),
@@ -145,7 +145,7 @@ While not required, for most projects it makes sense to create a default site la
 
 ~~~svelte
 <script>
-  import { InertiaLink } from 'inertia-svelte'
+  import { InertiaLink } from '@inertiajs/inertia-svelte'
 
   export let title
 </script>
@@ -188,7 +188,7 @@ To create an Inertia link, use the `<InertiaLink>` component.
 
 ~~~svelte
 <script>
-  import { InertiaLink } from 'inertia-svelte'
+  import { InertiaLink } from '@inertiajs/inertia-svelte'
 </script>
 
 <InertiaLink href="/">Home</InertiaLink>
@@ -256,7 +256,7 @@ The easiest way to access page props is with our `page` store.
 
 ~~~svelte
 <script>
-  import { InertiaLink, page } from 'inertia-svelte'
+  import { InertiaLink, page } from '@inertiajs/inertia-svelte'
 </script>
 
 <main>
@@ -284,7 +284,8 @@ To mitigate this issue, you can use the `remember` store to tell Inertia.js whic
 
 ~~~svelte
 <script>
-  import { Inertia, remember } from 'inertia-svelte'
+  import { Inertia } from '@inertiajs/inertia'
+  import { remember } from '@inertiajs/inertia-svelte'
 
   let form = remember({
     first_name: null,
@@ -309,7 +310,8 @@ If your page contains multiple components using the remember functionality, you'
 
 ~~~svelte
 <script>
-  import { Inertia, page, remember } from 'inertia-svelte'
+  import { Inertia } from '@inertiajs/inertia'
+  import { page, remember } from '@inertiajs/inertia-svelte'
 
   $: ({ user } = $page)
 

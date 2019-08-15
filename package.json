@@ -1,16 +1,17 @@
 {
-  "name": "inertia-svelte",
+  "name": "@inertiajs/inertia-svelte",
   "version": "0.1.0",
   "description": "The Svelte adapter for Inertia.js",
   "author": "Pedro Borges",
   "license": "MIT",
   "main": "src/index.js",
-  "dependencies": {
-    "inertia": "inertiajs/inertia"
-  },
   "devDependencies": {
+    "@inertiajs/inertia": "^0.1.0",
     "eslint": "^5.15.3",
     "svelte": "^3.6.7"
+  },
+  "peerDependencies": {
+    "@inertiajs/inertia": "^0.1.0"
   },
   "keywords": [
     "svelte"
