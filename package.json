@@ -7,11 +7,11 @@
   "main": "src/index.js",
   "devDependencies": {
     "@inertiajs/inertia": "^0.1.3",
-    "eslint": "^5.15.3",
-    "svelte": "^3.8.1"
+    "eslint": "^6.1.0"
   },
   "peerDependencies": {
-    "@inertiajs/inertia": "^0.1.0"
+    "@inertiajs/inertia": "^0.1.3",
+    "svelte": "^3.8.1"
   },
   "keywords": [
     "svelte"
