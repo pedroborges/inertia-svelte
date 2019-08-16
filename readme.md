@@ -4,9 +4,9 @@
 
 Install using NPM:
 
-~~~sh
+```sh
 npm install @inertiajs/inertia-svelte --save
-~~~
+```
 
 ## Configure server-side framework
 
@@ -18,7 +18,7 @@ You'll need to setup the svelte-loader for webpack. You can do it manually follo
 
 Here is an example Webpack configuration that uses [Laravel Mix](https://github.com/JeffreyWay/laravel-mix). Note the `@` alias to the `/resources/js` directory.
 
-~~~js
+```js
 const mix = require('laravel-mix')
 const path = require('path')
 
@@ -26,7 +26,7 @@ mix
   .js('resources/js/app.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
   .webpackConfig({
-    output: {chunkFilename: 'js/[name].js?id=[chunkhash]'},
+    output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
     resolve: {
       mainFields: ['svelte', 'browser', 'module', 'main'],
       alias: {
@@ -48,37 +48,37 @@ mix
       ],
     },
   })
-~~~
+```
 
 ## Setup dynamic imports
 
 We recommend using code splitting with Inertia.js. To do this we need to enable [dynamic imports](https://github.com/tc39/proposal-dynamic-import). We'll use a Babel plugin to make this work. First, install the plugin:
 
-~~~sh
+```sh
 npm install @babel/plugin-syntax-dynamic-import --save
-~~~
+```
 
 Next, create a `.babelrc` file in your project with the following:
 
-~~~json
+```json
 {
   "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
-~~~
+```
 
 Alternatively, if you're using Laravel Mix, you can put this in your `webpack.mix.js` file:
 
-~~~js
+```js
 mix.babelConfig({
   plugins: ['@babel/plugin-syntax-dynamic-import'],
 })
-~~~
+```
 
 ## Initializing Svelte
 
 Next, update your main JavaScript file to boot your Inertia app. All we're doing here is initializing Svelte with the base Inertia page component.
 
-~~~js
+```js
 import { InertiaApp } from '@inertiajs/inertia-svelte'
 
 const app = document.getElementById('app')
@@ -90,7 +90,7 @@ new InertiaApp({
     resolveComponent: name => import(`@/Pages/${name}.svelte`).then(module => module.default),
   },
 })
-~~~
+```
 
 The `resolveComponent` is a callback that tells Inertia how to load a page component. It receives a page name (string), and must return a component instance.
 
@@ -100,7 +100,7 @@ It's possible to also use Inertia without code splitting. This will generate one
 
 One way to do this is manually loading all your page components:
 
-~~~js
+```js
 import { InertiaApp } from '@inertiajs/inertia-svelte'
 
 const app = document.getElementById('app')
@@ -119,11 +119,11 @@ new InertiaApp({
     resolveComponent: name => pages[name],
   },
 })
-~~~
+```
 
 Another option is to use `required.context` to automatically register all your page components.
 
-~~~js
+```js
 import { InertiaApp } from '@inertiajs/inertia-svelte'
 
 const app = document.getElementById('app')
@@ -135,15 +135,15 @@ new InertiaApp({
   props: {
     initialPage: JSON.parse(app.dataset.page),
     resolveComponent: name => files(`./Pages/${name}.svelte`).default,
-  }
+  },
 })
-~~~
+```
 
 ## Creating a base layout
 
 While not required, for most projects it makes sense to create a default site layout that your specific pages can extend. Save this to `/Shared/Layout.svelte`.
 
-~~~svelte
+```svelte
 <script>
   import { InertiaLink } from '@inertiajs/inertia-svelte'
 
@@ -165,13 +165,13 @@ While not required, for most projects it makes sense to create a default site la
     <slot />
   </article>
 </main>
-~~~
+```
 
 ## Creating page components
 
 With Inertia.js, each page in your application is a JavaScript component. Here's an example of a page component. Save this to `/Pages/Welcome.svelte`. Note how it extends the `Layout.svelte` component we created above.
 
-~~~svelte
+```svelte
 <script>
   import Layout from '@/Shared/Layout.svelte';
 </script>
@@ -180,50 +180,50 @@ With Inertia.js, each page in your application is a JavaScript component. Here's
   <h1>Welcome</h1>
   <p>Welcome to my first Inertia.js app!</p>
 </Layout>
-~~~
+```
 
 ## Creating links
 
 To create an Inertia link, use the `<InertiaLink>` component.
 
-~~~svelte
+```svelte
 <script>
   import { InertiaLink } from '@inertiajs/inertia-svelte'
 </script>
 
 <InertiaLink href="/">Home</InertiaLink>
-~~~
+```
 
 You can also specify the browser history and scroll behaviour. By default all link clicks "push" a new history state, and reset the scroll position back to the top of the page. However, you can override these defaults using the `replace` and `preserveScroll` attributes.
 
-~~~svelte
+```svelte
 <InertiaLink href="/" preserveScroll replace>Home</InertiaLink>
-~~~
+```
 
 You can also specify the method for the request. The default is `GET`, but you can also use `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-~~~svelte
+```svelte
 <InertiaLink href="/logout" method="post">Logout</InertiaLink>
-~~~
+```
 
 You can add data using the `data` attribute:
 
-~~~svelte
+```svelte
 <InertiaLink href="/endpoint" method="post" data={{ foo: bar}}>Save</InertiaLink>
-~~~
+```
 
 You can also preserve a page component's local state using the `preserveState` attribute. This will prevent a page component from fully re-rendering. This is especially helpful with forms, since you can avoid manually repopulating input fields, and can also maintain a focused input.
 
-~~~svelte
+```svelte
 <input value={query} on:change={handleChange} />
 <InertiaLink href="/search" data={query} preserveState>Search</InertiaLink>
-~~~
+```
 
 ## Manually making visits
 
 In addition to clicking links, it's also very common to manually make Inertia visits. The following methods are available. Take note of the defaults.
 
-~~~js
+```js
 // Make a visit
 Inertia.visit(url, { method: 'get', data: {}, replace: false, preserveState: false, preserveScroll: false })
 
@@ -244,7 +244,7 @@ Inertia.patch(url, data, { replace: false, preserveState: true, preserveScroll: 
 
 // Make a DELETE visit
 Inertia.delete(url, { replace: false, preserveState: false, preserveScroll: false })
-~~~
+```
 
 Just like with an `<InertiaLink>`, you can control the history control behaviour using `replace`, scroll behaviour using `preserveScroll`, and local component state behaviour using `preserveState`.
 
@@ -254,7 +254,7 @@ Sometimes it's necessary to access the page data (props) from a non-page compone
 
 The easiest way to access page props is with our `page` store.
 
-~~~svelte
+```svelte
 <script>
   import { InertiaLink, page } from '@inertiajs/inertia-svelte'
 </script>
@@ -274,7 +274,7 @@ The easiest way to access page props is with our `page` store.
     <slot />
   </article>
 </main>
-~~~
+```
 
 ## Remembering local component state
 
@@ -282,7 +282,7 @@ When navigating browser history, Inertia reloads pages using prop data cached in
 
 To mitigate this issue, you can use the `remember` store to tell Inertia.js which local component state to cache.
 
-~~~svelte
+```svelte
 <script>
   import { Inertia } from '@inertiajs/inertia'
   import { remember } from '@inertiajs/inertia-svelte'
@@ -302,13 +302,13 @@ To mitigate this issue, you can use the `remember` store to tell Inertia.js whic
 
   <button type="submit">Save</button>
 </form>
-~~~
+```
 
 > `remember` returns a store. Prefix the variable you assign it to with `$` to take advantage of [auto-subscription](https://svelte.dev/tutorial/auto-subscriptions).
 
 If your page contains multiple components using the remember functionality, you'll need to provide a unique key for each component. For example, `Users/Create`. If you have multiple instances of the same component on the page, be sure to include a unique identifier for each of those instances. For example, `Users/Edit:{id}`.
 
-~~~svelte
+```svelte
 <script>
   import { Inertia } from '@inertiajs/inertia'
   import { page, remember } from '@inertiajs/inertia-svelte'
@@ -322,4 +322,4 @@ If your page contains multiple components using the remember functionality, you'
 
   // ...
 </script>
-~~~
+```
