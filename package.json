@@ -11,7 +11,7 @@
   },
   "peerDependencies": {
     "@inertiajs/inertia": "^0.1.3",
-    "svelte": "^3.8.1"
+    "svelte": "^3.8.0"
   },
   "keywords": [
     "svelte"
