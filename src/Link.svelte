@@ -11,7 +11,7 @@
     replace = false,
     preserveScroll = false,
     preserveState = false
-  
+
   $: props = (({ data, href, method, preserveScroll, preserveState, replace, ...rest }) => rest)($$props)
 
   function visit(event) {

@@ -3,13 +3,13 @@ import { onDestroy } from 'svelte'
 import { writable } from 'svelte/store'
 
 function remember(initialState, key) {
-    const restored = Inertia.restore(key)
-    const store = writable(restored !== undefined ? restored : initialState)
-    const unsubscribe = store.subscribe(state => Inertia.remember(state, key))
+  const restored = Inertia.restore(key)
+  const store = writable(restored !== undefined ? restored : initialState)
+  const unsubscribe = store.subscribe(state => Inertia.remember(state, key))
 
-    onDestroy(unsubscribe)
+  onDestroy(unsubscribe)
 
-    return store
+  return store
 }
 
 export default remember
