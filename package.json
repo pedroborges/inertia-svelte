@@ -5,7 +5,10 @@
   "keywords": [
     "svelte"
   ],
-  "author": "Pedro Borges",
+  "contributors": [
+    "Jonathan Reinink <jonathan@reinink.ca>",
+    "Pedro Borges <oi@pedroborg.es>"
+  ],
   "license": "MIT",
   "main": "src/index.js",
   "devDependencies": {
