@@ -15,10 +15,5 @@
   },
   "keywords": [
     "svelte"
-  ],
-  "files": [
-    "src",
-    "index.mjs",
-    "src/index.js"
   ]
 }
